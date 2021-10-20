@@ -29,38 +29,25 @@ const main = async function () {
   console.log(Date.now() - startTime);
 
   const sum = { sum: 0 };
-  // const interval = 15;
-  // for (let i = 0; i <= 100; i += interval) {
-  //   if ((interval - (100 - i)) * -1 < 5) {
-  //     await scrapePosterUrls(movies.slice(i), startTime, sum);
-  //     break;
-  //   }
-  //   await scrapePosterUrls(movies.slice(i, i + interval), startTime, sum);
-  // }
-  // await scrapePosterUrls(movies.slice(0, 2), startTime, sum);
-  sum.sum = 0;
-  // await scrapePosterUrls(movies, startTime, sum);
-  // await scrapePosterImgSrcs(movies, startTime, sum);
-  // await scrapePosterImgSrcs(movies.slice(0, 2), startTime, sum);
 
-  // console.log(movies);
-  // fs.writeFileSync(
-  //   './movies.json',
-  //   JSON.stringify({
-  //     results: movies.length,
-  //     data: {
-  //       movies: movies.slice(0, 2),
-  //     },
-  //   })
-  // );
+  const urlsStart = Date.now();
+  await scrapePosterUrls(movies, startTime, sum);
+  const urlsTime = Date.now() - urlsStart;
+
+  sum.sum = 0;
+
+  const srcsStart = Date.now();
+  await scrapePosterImgSrcs(movies, startTime, sum);
+  const srcTime = Date.now() - srcsStart;
+
   const endTime = Date.now();
   await Movie.deleteMany();
   await Movie.create(movies);
   await Log.create({
     startTime,
     endTime,
-    urlsTime: Date.now(),
-    srcTime: Date.now(),
+    urlsTime,
+    srcTime,
     totalTime: endTime - startTime,
   });
   console.log('DONE', Date.now() - startTime);
