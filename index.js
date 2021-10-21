@@ -10,7 +10,6 @@ const Log = require('./models/logModel');
 
 const main = async function () {
   try {
-    const startTime = Date.now();
     await mongoose
       .connect(
         'mongodb+srv://danialsyed66:5nnv@U3!ESdtXCz@cluster0.2wfch.mongodb.net/imdbScraperDB?retryWrites=true&w=majority',
@@ -21,21 +20,12 @@ const main = async function () {
           useFindAndModify: false,
         }
       )
-      .then(async () => {
-        console.log('Connected to MongoDB');
-        await Log.create({
-          startTime,
-          info: 'Connected to MongoDB',
-        });
-      })
+      .then(() => console.log('Connected to MongoDB'))
       .catch(err => console.log(err));
 
+    const startTime = Date.now();
     const movies = [];
     await scrapeMovieData(movies);
-    await Log.create({
-      startTime,
-      info: 'Data Scraped',
-    });
 
     console.log(Date.now() - startTime);
 
