@@ -1,7 +1,5 @@
+const fs = require('fs');
 const mongoose = require('mongoose');
-const express = require('express');
-
-const app = express();
 
 const scrapeMovieData = require('./utils/scrapeMovieData');
 const scrapePosterUrls = require('./utils/scrapePosterUrls');
@@ -55,11 +53,4 @@ const main = async function () {
   console.log('DONE', Date.now() - startTime);
 };
 
-app.get('/', async (req, res, next) => {
-  try {
-    await main();
-    res.status(200).json('Done');
-  } catch (err) {
-    res.status(500).json({ err });
-  }
-});
+main();

@@ -1,4 +1,0 @@
-cron:
-  - description: 'daily scraping'
-    url: /
-    schedule: every 24 hours
