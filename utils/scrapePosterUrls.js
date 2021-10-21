@@ -14,7 +14,7 @@ module.exports = async function (movies, d, sum) {
           'div.Media__PosterContainer-sc-1x98dcb-1.dGdktI > div > a'
         ).attr('href');
         movie.posterUrl = url && 'https://www.imdb.com' + url;
-        console.log(++sum.sum, Date.now() - d);
+        // console.log(++sum.sum, Date.now() - d);
         return movie;
       })
     );
