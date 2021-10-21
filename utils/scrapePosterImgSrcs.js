@@ -1,10 +1,14 @@
 const Nightmare = require('nightmare');
 // const nightmare = Nightmare({ show: true });
 const nightmare = Nightmare();
+const Log = require('../models/logModel');
 
 module.exports = async function (movies, d, sum) {
   for (let i = 0; i < movies.length; i++) {
     try {
+      await Log.create({
+        info: 'IN Srcs',
+      });
       if (movies[i].posterUrl)
         movies[i].imgSrc = await nightmare
           .goto(movies[i].posterUrl)
