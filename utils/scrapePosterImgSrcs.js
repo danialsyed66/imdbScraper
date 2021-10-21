@@ -6,7 +6,10 @@ const Log = require('../models/logModel');
 module.exports = async function (movies, d, sum) {
   for (let i = 0; i < movies.length; i++) {
     try {
-      if (movies[i].posterUrl)
+      if (movies[i].posterUrl) {
+        await Log.create({
+          info: `IN Src: ${movies[i].posterUrl}`,
+        });
         movies[i].imgSrc = await nightmare
           .goto(movies[i].posterUrl)
           .evaluate(async () => {
@@ -19,6 +22,7 @@ module.exports = async function (movies, d, sum) {
               )
               .getAttribute('src');
           });
+      }
       console.log(++sum.sum, Date.now() - d);
     } catch (err) {
       console.log('scrapePosterImgSrcs');
