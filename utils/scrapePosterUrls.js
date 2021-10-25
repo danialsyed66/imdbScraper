@@ -5,9 +5,7 @@ module.exports = async function (movies, d, sum) {
   try {
     await Promise.allSettled(
       movies.map(async movie => {
-        const { data } = await axios.get(movie.descriptionUrl, {
-          timeout: 120000,
-        });
+        const { data } = await axios.get(movie.descriptionUrl);
         if (!data) return movie;
         const $ = await cheerio.load(data);
         const url = $(

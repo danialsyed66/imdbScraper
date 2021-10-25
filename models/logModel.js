@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const logSchema = mongoose.Schema({
-  info: String,
   startTime: Date,
   endTime: Date,
   urlsTime: Number,

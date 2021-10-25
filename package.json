@@ -1,5 +1,5 @@
 {
-  "name": "imdb",
+  "name": "imdbPuppeteer",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,7 +12,9 @@
   "dependencies": {
     "axios": "^0.23.0",
     "cheerio": "^1.0.0-rc.10",
+    "express": "^4.17.1",
     "mongoose": "^5.13.12",
-    "nightmare": "^3.0.2"
+    "node-cron": "^3.0.0",
+    "puppeteer": "^10.4.0"
   }
 }
